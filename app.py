@@ -114,4 +114,4 @@ def create_a_user():
 
 if __name__ == "__main__":
     app.secret_key = 'mysecret'
-    app.run(debug=True, port=8000)
+    app.run(debug=False, port=8000)
