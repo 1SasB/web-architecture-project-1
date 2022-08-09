@@ -9,6 +9,7 @@
     <style></style>
 </head>
 <body>
+  {% block content %}
     <div class="wrapper">
         <div class="title-text">
           <div class="title login">Login Form</div>
@@ -56,20 +57,26 @@
               </div>
             </form>
           </div>
+          <!-- <div id="error-box">
+            An error occured please try again later
+          </div> -->
+
           <div>
-            {% with messages = get_flashed_messages() %}
+            {% with messages = get_flashed_messages(with_categories = True) %}
               {% if messages %}
-              <div id="alert-box1" class="signup-link" role="alert">
-                {% for message in messages %}
+              
+                {% for category,message in messages %}
+                <div id="alert-box1" class="error-box {{category}}" role="alert">
                   {{ message }}
+                </div>
                 {% endfor %}
-              </div>
+             
               {% endif %}
             {% endwith %}
           </div>
         </div>
       </div>
-
+{% endblock %}
 <script src="{{ url_for('static', filename='js/login.js') }}"></script>
 </body>
 </html>

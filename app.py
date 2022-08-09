@@ -8,6 +8,7 @@ import unicodedata
 app = Flask(__name__)
 
 
+
 @app.route("/login", methods=["GET","POST"])
 def login_user():
     if request.method == 'POST':
@@ -46,16 +47,17 @@ def index():
             user_token = session['user_token']
             r = requests.get('https://sasu-auth-project.herokuapp.com/users/me',headers={'Content-Type':'application/json',
                'Authorization': 'Bearer {}'.format(user_token)})
-            print(type(r.status_code))
+
             if r.status_code == 200:
                 data = r.json()
                 username = data.get('name')
                 return render_template("index.html",name=username)
             elif r.status_code == 401:
                 return redirect(url_for('login_user'))
+
         except Exception as e:
-            
-            
+            print(e)
+            flash("An error Occured Please Try again later",category='error')
             return redirect(url_for('create_a_user'))
     else:
 
@@ -73,10 +75,14 @@ def logout_user():
                 session.pop('user_token')
                 flash("Logout successful",category='success')
                 return redirect(url_for('reg_login'))
+
             elif r.status_code == 401:
-                return redirect(url_for('login_user'))
+                flash("An error Occured Please Try again later",category='error')
+                return redirect(url_for('index'))
+
         except Exception as e:
-            return redirect(url_for('create_a_user'))
+            flash("An error Occured Please Try again later",category='error')
+            return redirect(url_for('index'))
     else:
         return render_template('reg-log.html')
 
@@ -95,16 +101,17 @@ def create_a_user():
         }
         try:
             r = requests.post('https://sasu-auth-project.herokuapp.com/users',json=data)
-            print(r.status_code)
-            print(r.json())
+            
             if r.status_code == 201:
                 flash("user created successfuly",category='success')
                 return redirect(url_for('login_user'))
             else:
-                flash("Couldnt create user",category='warning')
+                flash("Couldnt create user",category='error')
                 return redirect(url_for('create_a_user'))
         except Exception as e:
+            flash("An error Occured Please Try again later",category='error')
             print(e)
+            return redirect(url_for('create_a_user'))
         # pass
     return render_template('reg-log.html')
 
@@ -114,4 +121,4 @@ def create_a_user():
 
 if __name__ == "__main__":
     app.secret_key = 'mysecret'
-    app.run(debug=False, port=8000)
+    app.run(debug=True, port=8000)

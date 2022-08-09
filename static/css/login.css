@@ -222,3 +222,17 @@ form .btn input[type="submit"]{
   a #logout-btn:focus {
       outline: none;
   }
+
+  .error-box{
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .success{
+    background-color: rgb(168, 250, 223);
+    color: #000;
+  }
+  .error{
+    background-color: rgb(239, 134, 134);
+    color: rgb(0, 0, 0);
+  }

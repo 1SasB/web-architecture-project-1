@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
+    {% block content %}
     <div>
         <h2 style="color: white;">Hello {{username}}, Login Successful</h2>
         
@@ -15,5 +16,6 @@
     <div>
         <a id="logout-btn" href="{{ url_for('logout_user') }}" class="noselect">Logout</a>
     </div>
+    {% endblock %}
 </body>
 </html>
