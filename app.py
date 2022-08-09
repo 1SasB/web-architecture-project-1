@@ -26,7 +26,13 @@ def login_user():
                 data = r.json()
                 print(data.get('token'))
                 session['user_token'] = data.get('token')
-                return redirect(url_for('index'))    
+                return redirect(url_for('index'))
+            elif r.status_code == 400:
+                flash('Invalid Login',category='error')
+                return redirect(url_for('reg_login'))  
+            else:
+                flash('Couldnt Login',category='error')
+                return redirect(url_for('reg_login'))
         except Exception as e:
             print(e)
         # pass
@@ -53,6 +59,7 @@ def index():
                 username = data.get('name')
                 return render_template("index.html",name=username)
             elif r.status_code == 401:
+                flash("couldnt retrieve data",category='error')
                 return redirect(url_for('login_user'))
 
         except Exception as e:

@@ -195,7 +195,7 @@ form .btn input[type="submit"]{
           -webkit-tap-highlight-color: transparent;
   }
   
-  a #logout-btn {
+  #logout-btn {
       width: 150px;
       height: 50px;
       cursor: pointer;
@@ -213,13 +213,13 @@ form .btn input[type="submit"]{
       padding: 25px;
   }
   
-  a #logout-btn:hover {
+  #logout-btn:hover {
       background-position: left;
       color: white;
       box-shadow: inset 0px 3px 5px rgba(255,255,255,1), 0px 0px 10px rgba(0,0,0,0.25);
   }
   
-  a #logout-btn:focus {
+  #logout-btn:focus {
       outline: none;
   }
 
