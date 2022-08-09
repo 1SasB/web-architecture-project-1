@@ -7,24 +7,23 @@ import json
 import unicodedata
 app = Flask(__name__)
 
-
+app.config['SECRET_KEY'] = '5b3cd5b80eb8b217c20fb37074ff5a33'
 
 @app.route("/login", methods=["GET","POST"])
 def login_user():
     if request.method == 'POST':
 
-        print(request.form)
+        
         data = {
             'email': request.form.get('email'),
             'password': request.form.get('password'),
         }
         try:
             r = requests.post('https://sasu-auth-project.herokuapp.com/users/login',json=data)
-            print(r.status_code)
+            # print(r.status_code)
 
             if r.status_code == 200:
-                data = r.json()
-                print(data.get('token'))
+                data = r.json() 
                 session['user_token'] = data.get('token')
                 return redirect(url_for('index'))
             elif r.status_code == 400:
@@ -77,7 +76,7 @@ def logout_user():
             user_token = session['user_token']
             r = requests.post('https://sasu-auth-project.herokuapp.com/users/logout',headers={'Content-Type':'application/json',
                'Authorization': 'Bearer {}'.format(user_token)})
-            print(type(r.status_code))
+            
             if r.status_code == 200:
                 session.pop('user_token')
                 flash("Logout successful",category='success')
@@ -88,6 +87,7 @@ def logout_user():
                 return redirect(url_for('index'))
 
         except Exception as e:
+            print(e)
             flash("An error Occured Please Try again later",category='error')
             return redirect(url_for('index'))
     else:
@@ -100,7 +100,7 @@ def logout_user():
 @app.route("/register", methods=["GET", "POST"])
 def create_a_user():
     if request.method == "POST":
-        print(request.form.get('email'))
+        
         data = {
             'email': request.form.get('email'),
             'password': request.form.get('password1'),
@@ -127,5 +127,4 @@ def create_a_user():
 
 
 if __name__ == "__main__":
-    app.secret_key = 'mysecret'
-    app.run(debug=True, port=8000)
+    app.run()

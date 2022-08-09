@@ -15,3 +15,13 @@ const loginText = document.querySelector(".title-text .login");
         signupBtn.click();
         return false;
       });
+// console.log("im in js file")
+// function onChange() {
+//       const password = document.querySelector('input[name=password1]');
+//       const confirm = document.querySelector('input[name=password2]');
+//       if (confirm.value === password.value) {
+//         confirm.setCustomValidity('');
+//       } else {
+//         confirm.setCustomValidity('Passwords do not match');
+//       }
+// }
