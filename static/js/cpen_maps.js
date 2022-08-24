@@ -6,7 +6,7 @@ $(document).ready(function() {
     function newDataStore(layer_index){
         var sp_structures_dataSource = new ol.source.TileWMS(
             {
-                url : 'http://localhost:8080/geoserver/cpen412_project2/wms',
+                url : 'http://ec2-44-201-211-76.compute-1.amazonaws.com:8080/geoserver/cpen412_project2/wms',
                 params : {
                     'LAYERS' : layers[layer_index],
                     'TILED' : true
