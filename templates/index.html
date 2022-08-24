@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    
+    <link rel="stylesheet" href="../static/openlayers_v6_15_1/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="../static/openlayers_v6_15_1/layerswitcher/ol-layerswitcher.css" type="text/css">
 </head>
 <body>
     {% block content %}
@@ -13,9 +16,22 @@
         <h2 style="color: white;">Hello {{name}}, Login Successful</h2>
         
     </div>
+    <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+        <div class="card">
+          <div class="row">
+            <div id="map"  class="map"></div>
+       </div>
+        </div>
+      </div>
     <div>
         <a id="logout-btn" href="{{ url_for('logout_user') }}" class="noselect">Logout</a>
     </div>
     {% endblock %}
+
+    <script src="../static/js/cpen_maps.js"></script>
+    
+    <script src="../static/openlayers_v6_15_1/js/ol.js"></script>
+   <!-- <script src="openlayers_v6_15_1/proj4.js"></script> -->
+    <script src="../static/openlayers_v6_15_1/layerswitcher/ol-layerswitcher.js"></script>
 </body>
 </html>
